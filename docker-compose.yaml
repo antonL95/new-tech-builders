@@ -1,0 +1,126 @@
+x-web-image: &web-image
+  build:
+    context: .
+    dockerfile: Dockerfile
+    target: web
+    args:
+      - FLUX_USERNAME=${FLUX_USERNAME}
+      - FLUX_LICENSE_KEY=${FLUX_LICENSE_KEY}
+
+x-app-volumes: &app-volumes
+  volumes:
+    - 'app-storage:/var/www/html/storage:noexec,nosuid,nodev'
+  tmpfs:
+    - /tmp:noexec,nosuid,nodev,mode=1777
+
+x-security-opts: &security-opts
+  security_opt:
+    - no-new-privileges:true
+  cap_drop:
+    - ALL
+  cap_add:
+    - NET_BIND_SERVICE
+    - CHOWN
+    - SETGID
+    - SETUID
+    - DAC_OVERRIDE
+
+x-resource-limits: &resource-limits
+  deploy:
+    resources:
+      limits:
+        memory: 2G
+      reservations:
+        memory: 256M
+
+x-logging: &logging
+  logging:
+    driver: 'json-file'
+    options:
+      max-size: '10m'
+      max-file: '3'
+
+x-app-env-file: &app-env-file
+  env_file:
+    - .env
+
+x-docker-environment: &docker-environment
+  AUTORUN_ENABLED: true
+
+x-restart-policy: &restart-policy
+  restart: unless-stopped
+  stop_signal: SIGTERM
+
+networks:
+  app-network:
+    driver: bridge
+    internal: false
+
+services:
+  app:
+    <<: [ *web-image, *app-volumes, *security-opts, *logging, *app-env-file, *restart-policy ]
+    cap_add:
+      - NET_BIND_SERVICE
+    environment:
+      <<: *docker-environment
+      PHP_FPM_POOL_NAME: 'app'
+    command:
+      [
+        'php', 'artisan', 'octane:start',
+        '--server=frankenphp',
+        '--port=8080',
+        '--max-requests=500',
+      ]
+    deploy:
+      replicas: ${APP_REPLICAS:-1}
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 256M
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=coolify'
+      # Router config
+      - 'traefik.http.routers.newtechbuilders-com.rule=Host(`new-tech-builders.com`)'
+      - 'traefik.http.routers.newtechbuilders-com.entrypoints=https'
+      - 'traefik.http.routers.newtechbuilders-com.tls=true'
+      - 'traefik.http.routers.newtechbuilders-com.tls.certresolver=letsencrypt'
+      # Load balancer config
+      - 'traefik.http.services.newtechbuilders-com.loadbalancer.server.port=8080'
+      - 'traefik.http.services.newtechbuilders-com.loadbalancer.sticky.cookie=true'
+      - 'traefik.http.services.newtechbuilders-com.loadbalancer.sticky.cookie.name=newtechbuilders_affinity'
+      - 'traefik.http.services.newtechbuilders-com.loadbalancer.sticky.cookie.httponly=true'
+      - 'traefik.http.services.newtechbuilders-com.loadbalancer.sticky.cookie.secure=true'
+      - 'traefik.http.services.newtechbuilders-com.loadbalancer.sticky.cookie.samesite=lax'
+      - 'traefik.http.services.newtechbuilders-com.loadbalancer.healthcheck.path=/up'
+      - 'traefik.http.services.newtechbuilders-com.loadbalancer.healthcheck.interval=10s'
+      # Middlewares
+      - 'traefik.http.routers.newtechbuilders-com.middlewares=newtechbuilders-compress,newtechbuilders-headers'
+      - 'traefik.http.middlewares.newtechbuilders-compress.compress=true'
+      - 'traefik.http.middlewares.newtechbuilders-headers.headers.browserxssfilter=true'
+      - 'traefik.http.middlewares.newtechbuilders-headers.headers.contenttypenosniff=true'
+      - 'traefik.http.middlewares.newtechbuilders-headers.headers.framedeny=true'
+      - 'traefik.http.middlewares.newtechbuilders-headers.headers.stsincludesubdomains=true'
+      - 'traefik.http.middlewares.newtechbuilders-headers.headers.stsseconds=31536000'
+    healthcheck:
+      test: [ 'CMD', 'healthcheck-octane' ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    stop_grace_period: 30s
+    networks:
+      - app-network
+      - coolify
+
+volumes:
+  app-storage:
+    driver: local
