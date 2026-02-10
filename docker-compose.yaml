@@ -55,6 +55,8 @@ networks:
   app-network:
     driver: bridge
     internal: false
+  coolify:
+    external: true
 
 services:
   app:
