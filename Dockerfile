@@ -1,17 +1,32 @@
-FROM oven/bun:1 AS bun-source
+# syntax=docker/dockerfile:1
+FROM oven/bun:1.4.0 AS bun-source
 
-FROM serversideup/php:8.5-frankenphp AS web
-ARG FLUX_USERNAME
-ARG FLUX_LICENSE_KEY
-ENV FLUX_USERNAME=${FLUX_USERNAME}
-ENV FLUX_LICENSE_KEY=${FLUX_LICENSE_KEY}
-ENV PHP_OPCACHE_ENABLE=1
+FROM serversideup/php:8.5-cli AS cli-base
 USER root
 RUN install-php-extensions intl bcmath
-COPY --from=bun-source /usr/local/bin/bun /usr/local/bin/bun
-COPY --chown=www-data:www-data . /var/www/html
 USER www-data
-RUN composer config http-basic.composer.fluxui.dev $FLUX_USERNAME $FLUX_LICENSE_KEY
-RUN composer install --no-interaction --optimize-autoloader --no-dev
-RUN bun install && bun run build && rm -rf /var/www/html/.bun
-RUN rm -rf /var/www/html/.composer/cache
+
+FROM serversideup/php:8.5-frankenphp AS web-base
+USER root
+RUN install-php-extensions intl bcmath
+USER www-data
+
+FROM cli-base AS vendor
+COPY --chown=www-data:www-data composer.json composer.lock /var/www/html/
+RUN --mount=type=cache,target=/composer/cache,uid=33,gid=33 \
+    composer install --no-dev --no-interaction --no-scripts --no-autoloader
+COPY --chown=www-data:www-data . /var/www/html
+RUN --mount=type=cache,target=/composer/cache,uid=33,gid=33 \
+    composer install --no-dev --no-interaction --optimize-autoloader
+
+FROM vendor AS assets
+ENV BUN_INSTALL_CACHE_DIR=/tmp/bun-cache
+COPY --from=bun-source /usr/local/bin/bun /usr/local/bin/bun
+RUN --mount=type=cache,target=/tmp/bun-cache,uid=33,gid=33 \
+    bun install --frozen-lockfile
+RUN bun run build
+
+FROM web-base AS web
+ENV PHP_OPCACHE_ENABLE=1
+COPY --from=vendor --chown=www-data:www-data /var/www/html /var/www/html
+COPY --from=assets --chown=www-data:www-data /var/www/html/public/build /var/www/html/public/build
