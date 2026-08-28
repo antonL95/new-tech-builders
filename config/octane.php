@@ -14,13 +14,10 @@ use Laravel\Octane\Events\WorkerErrorOccurred;
 use Laravel\Octane\Events\WorkerStarting;
 use Laravel\Octane\Events\WorkerStopping;
 use Laravel\Octane\Listeners\CloseMonologHandlers;
-use Laravel\Octane\Listeners\CollectGarbage;
-use Laravel\Octane\Listeners\DisconnectFromDatabases;
 use Laravel\Octane\Listeners\EnsureUploadedFilesAreValid;
 use Laravel\Octane\Listeners\EnsureUploadedFilesCanBeMoved;
 use Laravel\Octane\Listeners\FlushOnce;
 use Laravel\Octane\Listeners\FlushTemporaryContainerInstances;
-use Laravel\Octane\Listeners\FlushUploadedFiles;
 use Laravel\Octane\Listeners\ReportException;
 use Laravel\Octane\Listeners\StopWorkerIfNecessary;
 use Laravel\Octane\Octane;
@@ -75,40 +72,31 @@ return [
         RequestReceived::class => [
             ...Octane::prepareApplicationForNextOperation(),
             ...Octane::prepareApplicationForNextRequest(),
-            //
         ],
 
         RequestHandled::class => [
-            //
         ],
 
         RequestTerminated::class => [
-            // FlushUploadedFiles::class,
         ],
 
         TaskReceived::class => [
             ...Octane::prepareApplicationForNextOperation(),
-            //
         ],
 
         TaskTerminated::class => [
-            //
         ],
 
         TickReceived::class => [
             ...Octane::prepareApplicationForNextOperation(),
-            //
         ],
 
         TickTerminated::class => [
-            //
         ],
 
         OperationTerminated::class => [
             FlushOnce::class,
             FlushTemporaryContainerInstances::class,
-            // DisconnectFromDatabases::class,
-            // CollectGarbage::class,
         ],
 
         WorkerErrorOccurred::class => [
@@ -137,7 +125,6 @@ return [
     ],
 
     'flush' => [
-        //
     ],
 
     /*

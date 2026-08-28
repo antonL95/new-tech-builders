@@ -10,8 +10,8 @@ The Laravel Boost guidelines are specifically curated by Laravel maintainers for
 
 This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
 
-- php - 8.5.2
-- laravel/framework (LARAVEL) - v12
+- php - 8.5.8
+- laravel/framework (LARAVEL) - v13
 - laravel/octane (OCTANE) - v2
 - laravel/prompts (PROMPTS) - v0
 - livewire/flux (FLUXUI_FREE) - v2
@@ -21,8 +21,8 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - laravel/mcp (MCP) - v0
 - laravel/pint (PINT) - v1
 - laravel/sail (SAIL) - v1
-- pestphp/pest (PEST) - v4
-- phpunit/phpunit (PHPUNIT) - v12
+- pestphp/pest (PEST) - v5
+- phpunit/phpunit (PHPUNIT) - v13
 - rector/rector (RECTOR) - v2
 
 ## Skills Activation
@@ -31,7 +31,7 @@ This project has domain-specific skills available. You MUST activate the relevan
 
 - `fluxui-development` — Develops UIs with Flux UI Pro components. Activates when creating buttons, forms, modals, inputs, tables, charts, date pickers, or UI components; replacing HTML elements with Flux; working with flux: components; or when the user mentions Flux, component library, UI components, form fields, or asks about available Flux components.
 - `livewire-development` — Develops reactive Livewire 4 components. Activates when creating, updating, or modifying Livewire components; working with wire:model, wire:click, wire:loading, or any wire: directives; adding real-time updates, loading states, or reactivity; debugging component behavior; writing Livewire tests; or when the user mentions Livewire, component, counter, or reactive UI.
-- `pest-testing` — Tests applications using the Pest 4 PHP framework. Activates when writing tests, creating unit or feature tests, adding assertions, testing Livewire components, browser testing, debugging test failures, working with datasets or mocking; or when the user mentions test, spec, TDD, expects, assertion, coverage, or needs to verify functionality works.
+- `pest-testing` — Tests applications using the Pest 5 PHP framework. Activates when writing tests, creating unit or feature tests, adding assertions, testing Livewire components, browser testing, debugging test failures, working with datasets or mocking; or when the user mentions test, spec, TDD, expects, assertion, coverage, or needs to verify functionality works.
 
 ## Conventions
 

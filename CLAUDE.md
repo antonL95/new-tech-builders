@@ -4,19 +4,16 @@ This project's coding guidelines are split into path-scoped rule files in `.clau
 
 ## Package Versions
 
-- php - 8.5.2
-- laravel/framework (LARAVEL) - v12
+- php - 8.5.8
+- laravel/framework (LARAVEL) - v13
 - laravel/octane (OCTANE) - v2
 - laravel/prompts (PROMPTS) - v0
-- livewire/flux (FLUXUI_FREE) - v2
-- livewire/flux-pro (FLUXUI_PRO) - v2
-- livewire/livewire (LIVEWIRE) - v4
 - larastan/larastan (LARASTAN) - v3
 - laravel/mcp (MCP) - v0
 - laravel/pint (PINT) - v1
 - laravel/sail (SAIL) - v1
-- pestphp/pest (PEST) - v4
-- phpunit/phpunit (PHPUNIT) - v12
+- pestphp/pest (PEST) - v5
+- phpunit/phpunit (PHPUNIT) - v13
 - rector/rector (RECTOR) - v2
 
 ## Rule Files
@@ -27,9 +24,7 @@ This project's coding guidelines are split into path-scoped rule files in `.clau
 | `tooling.md` | Global | Laravel Boost MCP tools and Herd serving |
 | `php.md` | `**/*.php` | PHP coding standards, types, constructors, enums |
 | `laravel-core.md` | `**/*.php` | Eloquent, models, database, auth, queues, config |
-| `laravel-v12.md` | `**/*.php` | Laravel 12 structure and version-specific changes |
+| `laravel-v13.md` | `**/*.php` | Laravel 13 structure and version-specific changes |
 | `controllers.md` | `app/Http/Controllers/**`, `app/Http/Requests/**` | Form Requests, validation, API resources |
-| `livewire.md` | `app/Livewire/**`, `resources/views/**/*.blade.php` | Livewire component development |
-| `fluxui.md` | `resources/views/**/*.blade.php` | Flux UI Pro components |
 | `testing.md` | `tests/**/*.php` | Pest testing and test creation |
 | `pint.md` | `**/*.php` | Laravel Pint code formatting |

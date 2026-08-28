@@ -20,8 +20,10 @@ jobs:
           tools: composer:v2
           coverage: xdebug
 
-      - name: Setup Node
+      - name: Setup Bun
         uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.0
 
       - name: Copy Environment File
         run: cp .env.testing .env
@@ -35,11 +37,8 @@ jobs:
       - name: Generate Application Key
         run: php artisan key:generate
 
-      - name: Install Node Dependencies
-        run: bun ci --legacy-peer-deps
-
-      - name: Install Playwright Browsers
-        run: bunx playwright install --with-deps
+      - name: Install JavaScript Dependencies
+        run: bun install --frozen-lockfile
 
       - name: Build Assets
         run: bun run build
