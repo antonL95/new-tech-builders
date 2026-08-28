@@ -1,13 +1,13 @@
 ---
 name: pest-testing
 description: >-
-  Tests applications using the Pest 4 PHP framework. Activates when writing tests, creating unit or feature
+  Tests applications using the Pest 5 PHP framework. Activates when writing tests, creating unit or feature
   tests, adding assertions, testing Livewire components, browser testing, debugging test failures,
   working with datasets or mocking; or when the user mentions test, spec, TDD, expects, assertion,
   coverage, or needs to verify functionality works.
 ---
 
-# Pest Testing 4
+# Pest Testing 5
 
 ## When to Apply
 
@@ -21,7 +21,9 @@ Activate this skill when:
 
 ## Documentation
 
-Use `search-docs` for detailed Pest 4 patterns and documentation.
+Use `search-docs` for detailed Pest 5 patterns and documentation.
+
+Pest 5 runs on PHPUnit 13 and requires PHP 8.4 or greater. Consult the PHPUnit 13 changelog when a previously passing assertion starts failing.
 
 ## Basic Usage
 
@@ -88,7 +90,7 @@ it('has emails', function (string $email) {
 
 </code-snippet>
 
-## Pest 4 Features
+## Pest 5 Features
 
 | Feature | Purpose |
 |---------|---------|
@@ -154,7 +156,7 @@ Split tests across parallel processes for faster CI runs.
 
 ### Architecture Testing
 
-Pest 4 includes architecture testing (from Pest 3):
+Pest 5 includes architecture testing:
 
 <code-snippet name="Architecture Test Example" lang="php">
 
