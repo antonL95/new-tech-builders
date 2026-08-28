@@ -8,9 +8,6 @@ This project's coding guidelines are split into path-scoped rule files in `.clau
 - laravel/framework (LARAVEL) - v13
 - laravel/octane (OCTANE) - v2
 - laravel/prompts (PROMPTS) - v0
-- livewire/flux (FLUXUI_FREE) - v2
-- livewire/flux-pro (FLUXUI_PRO) - v2
-- livewire/livewire (LIVEWIRE) - v4
 - larastan/larastan (LARASTAN) - v3
 - laravel/mcp (MCP) - v0
 - laravel/pint (PINT) - v1
@@ -29,7 +26,5 @@ This project's coding guidelines are split into path-scoped rule files in `.clau
 | `laravel-core.md` | `**/*.php` | Eloquent, models, database, auth, queues, config |
 | `laravel-v13.md` | `**/*.php` | Laravel 13 structure and version-specific changes |
 | `controllers.md` | `app/Http/Controllers/**`, `app/Http/Requests/**` | Form Requests, validation, API resources |
-| `livewire.md` | `app/Livewire/**`, `resources/views/**/*.blade.php` | Livewire component development |
-| `fluxui.md` | `resources/views/**/*.blade.php` | Flux UI Pro components |
 | `testing.md` | `tests/**/*.php` | Pest testing and test creation |
 | `pint.md` | `**/*.php` | Laravel Pint code formatting |
