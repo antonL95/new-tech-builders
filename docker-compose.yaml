@@ -107,6 +107,7 @@ services:
       # Middlewares
       - 'traefik.http.routers.newtechbuilders-com.middlewares=newtechbuilders-compress,newtechbuilders-headers'
       - 'traefik.http.middlewares.newtechbuilders-compress.compress=true'
+      - 'traefik.http.middlewares.newtechbuilders-compress.compress.excludedContentTypes=video/mp4,image/png,image/jpeg,image/svg+xml,font/woff2'
       - 'traefik.http.middlewares.newtechbuilders-headers.headers.browserxssfilter=true'
       - 'traefik.http.middlewares.newtechbuilders-headers.headers.contenttypenosniff=true'
       - 'traefik.http.middlewares.newtechbuilders-headers.headers.framedeny=true'
