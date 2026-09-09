@@ -14,8 +14,8 @@
     ];
 
     $products = [
-        ['name' => 'Moneysky', 'copy' => 'All your finances in one place. Aggregates European bank accounts, investments, and portfolios into a single dashboard, with AI categorisation and tax tools for freelancers and small businesses.', 'image' => 'images/moneysky-mobile.png', 'alt' => 'Moneysky web app on a phone-sized screen'],
-        ['name' => 'PromptStor', 'copy' => 'A centralized prompt library that lives directly inside ChatGPT, Claude, Gemini, Perplexity, and Microsoft Copilot, so your best prompts are always one click away. It ships as a browser extension for Chrome and Firefox, with team collaboration for sharing and reusing prompts across an entire organisation.', 'image' => 'images/promptstor-mobile.png', 'alt' => 'PromptStor web app on a phone-sized screen'],
+        ['name' => 'Moneysky', 'copy' => 'All your finances in one place. Aggregates European bank accounts, investments, and portfolios into a single dashboard, with AI categorisation and tax tools for freelancers and small businesses.', 'image' => 'images/moneysky-mobile.png', 'alt' => 'Moneysky web app on a phone-sized screen', 'url' => 'https://moneysky.app/', 'domain' => 'moneysky.app'],
+        ['name' => 'PromptStor', 'copy' => 'A centralized prompt library that lives directly inside ChatGPT, Claude, Gemini, Perplexity, and Microsoft Copilot, so your best prompts are always one click away. It ships as a browser extension for Chrome and Firefox, with team collaboration for sharing and reusing prompts across an entire organisation.', 'image' => 'images/promptstor-mobile.png', 'alt' => 'PromptStor web app on a phone-sized screen', 'url' => 'https://promptstor.app/', 'domain' => 'promptstor.app'],
     ];
 @endphp
 
@@ -86,7 +86,7 @@
                         </div>
                         <div class="flex items-center justify-between gap-6 border-b border-hairline py-3.5">
                             <span class="mono-nav text-ink">Google Play</span>
-                            <span class="text-[14px] text-muted">In review</span>
+                            <a href="https://play.google.com/store/apps/details?id=com.newtechbuilders.tensen" target="_blank" rel="noopener" class="tap-44 text-[14px] font-medium text-accent tab:justify-end tab:text-right">Live — view listing ↗</a>
                         </div>
                     </div>
                 </div>
@@ -107,6 +107,13 @@
                     <div>
                         <h3 class="text-[44px] leading-[1.02] font-semibold tracking-[-0.03em] text-ink tab:text-[34px] mob:text-[28px]">{{ $product['name'] }}</h3>
                         <p class="mt-7 max-w-[520px] text-[17px] leading-[1.6] text-pretty text-body">{{ $product['copy'] }}</p>
+
+                        <div class="mt-9 border-t border-hairline">
+                            <div class="flex items-center justify-between gap-6 border-b border-hairline py-3.5">
+                                <span class="mono-nav text-ink">{{ $product['domain'] }}</span>
+                                <a href="{{ $product['url'] }}" target="_blank" rel="noopener" class="tap-44 text-[14px] font-medium text-accent tab:justify-end tab:text-right">Live — visit site ↗</a>
+                            </div>
+                        </div>
                     </div>
 
                     <figure class="m-0 tab:max-w-[280px] mob:max-w-none">
