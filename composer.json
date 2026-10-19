@@ -2,7 +2,7 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "new-tech-builders/website",
     "type": "project",
-    "description": "New Tech Builders marketing site.",
+    "description": "NewTech Builders marketing site.",
     "keywords": [
         "laravel",
         "framework"

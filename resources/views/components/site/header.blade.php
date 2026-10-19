@@ -1,6 +1,6 @@
 <header class="sticky top-0 z-20 border-b border-ink bg-paper">
     <div class="mx-auto flex h-16 max-w-[1240px] items-center gap-10 px-10 tab:gap-5 tab:px-6 mob:h-auto mob:flex-wrap mob:gap-2 mob:px-4 mob:pt-3 mob:pb-0">
-        <a href="{{ route('home') }}" class="mono-label tap-44 whitespace-nowrap text-ink no-underline">New Tech Builders</a>
+        <a href="{{ route('home') }}" class="mono-label tap-44 whitespace-nowrap text-ink no-underline">NewTech Builders</a>
 
         <div class="flex-1"></div>
 
