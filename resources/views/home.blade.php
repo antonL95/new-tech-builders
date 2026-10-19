@@ -2,7 +2,7 @@
     $services = [
         ['number' => '01', 'title' => 'Web Platforms & Data Migration', 'description' => 'Laravel and React platforms that carry real data. We move records off legacy systems with every relation intact and verified by counts, build search that works across languages and scripts, and give the people who maintain the content tools they can trust.'],
         ['number' => '02', 'title' => 'iOS & Android Development', 'description' => 'Native and cross-platform applications built for release — through review, store listing, and the updates after launch. Both stores, one codebase where it makes sense to share one.'],
-        ['number' => '03', 'title' => 'AI Development & Governance', 'description' => 'Model-backed features inside real products: retrieval, generation, and automation wired into an app that has users, rate limits, and a bill to keep down. Measured before it ships, reviewed by people where it matters, and documented for the EU AI Act.'],
+        ['number' => '03', 'title' => 'AI Development', 'description' => 'Model-backed features inside real products: retrieval, generation, and automation wired into an app that has users, rate limits, and a bill to keep down.'],
         ['number' => '04', 'title' => 'Product Building', 'description' => 'The whole arc, when there is no team yet: scope, design, build, submit, iterate. We have run it end to end on our own products, which is where the estimates come from.'],
         ['number' => '05', 'title' => 'Consultancy', 'description' => 'Short engagements for teams that already build: architecture review, platform and stack decisions, App Store and Play review problems, release process.'],
     ];
