@@ -23,15 +23,15 @@
     ];
 @endphp
 
-<x-layouts.app title="Terms of Service - New Tech Builders">
+<x-layouts.app title="Terms of Service · NewTech Builders">
     <x-legal.document
         eyebrow="Legal — Document 02"
         title="Terms of Service"
-        :meta="['Last updated: 15 August 2026', 'New Tech Builders s.r.o.', 'Governed by Czech law']"
+        :meta="['Last updated: 19 October 2026', 'NewTech Builders, s.r.o.', 'Governed by Czech law']"
         :sections="$sections">
 
         <x-legal.section :sections="$sections" id="t1">
-            <p>tensen.app is a sleep and dream journal developed and offered to you by NewTech Builders s.r.o., Id. No. 21811911, a company registered at Příčná 1892/4, Nové Město (Praha 1), 110 00 Praha, Czech Republic (&quot;Provider&quot;). Your use of tensen.app, of the Tensen mobile application, and of all related services provided through them by the Provider (together &quot;Tensen&quot;) is subject to the following terms (&quot;Terms&quot;), which upon your acceptance form a legally binding agreement between you and the Provider (&quot;Agreement&quot;).</p>
+            <p>tensen.app is a sleep and dream journal developed and offered to you by NewTech Builders, s.r.o., Id. No. 21811911, a company with its registered office at Příčná 1892/4, Nové Město, 110 00 Praha 1, Czech Republic, registered with the Municipal Court in Prague under file C 406331 (&quot;Provider&quot;). Your use of tensen.app, of the Tensen mobile application, and of all related services provided through them by the Provider (together &quot;Tensen&quot;) is subject to the following terms (&quot;Terms&quot;), which upon your acceptance form a legally binding agreement between you and the Provider (&quot;Agreement&quot;).</p>
         </x-legal.section>
 
         <x-legal.section :sections="$sections" id="t2">
@@ -47,7 +47,7 @@
 
         <x-legal.section :sections="$sections" id="t4">
             <p>To use Tensen you must create an account with your e-mail address, or sign in with Apple. You agree to provide accurate, truthful and current information and to keep it up to date. You must keep your login credentials confidential, and you are solely responsible for activity under your account. The Provider may refuse a registration or suspend an account that breaches these Terms.</p>
-            <p>You can delete your account and all data associated with it at any time from the account settings inside the application, or by writing to <a href="mailto:support@tensen.app">support@tensen.app</a>]. Deletion is permanent.</p>
+            <p>You can delete your account and all data associated with it at any time from the account settings inside the application, or by writing to <a href="mailto:support@tensen.app">support@tensen.app</a>. Deletion is permanent.</p>
         </x-legal.section>
 
         <x-legal.section :sections="$sections" id="t5">
@@ -84,7 +84,7 @@
         </x-legal.section>
 
         <x-legal.section :sections="$sections" id="t11">
-            <p>The Provider may update Tensen, change how features work, or discontinue features. The Provider does not guarantee uninterrupted availability. Support is available at <a href="mailto:support@tensen.app">support@tensen.app</a>] and on the support page of this website.</p>
+            <p>The Provider may update Tensen, change how features work, or discontinue features. The Provider does not guarantee uninterrupted availability. Support is available at <a href="mailto:support@tensen.app">support@tensen.app</a> and on the support page of this website.</p>
         </x-legal.section>
 
         <x-legal.section :sections="$sections" id="t12">
@@ -120,7 +120,7 @@
         </x-legal.section>
 
         <x-legal.section :sections="$sections" id="t20">
-            <p>NewTech Builders s.r.o., Id. No. 21811911, registered office at Příčná 1892/4, Nové Město (Praha 1), 110 00 Praha, Czech Republic. E-mail: <a href="mailto:support@tensen.app">support@tensen.app</a>].</p>
+            <p>NewTech Builders, s.r.o., Id. No. 21811911, registered office at Příčná 1892/4, Nové Město, 110 00 Praha 1, Czech Republic, registered with the Municipal Court in Prague under file C 406331. E-mail: <a href="mailto:support@tensen.app">support@tensen.app</a>.</p>
         </x-legal.section>
     </x-legal.document>
 </x-layouts.app>

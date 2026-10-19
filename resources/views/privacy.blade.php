@@ -24,15 +24,15 @@
     ];
 @endphp
 
-<x-layouts.app title="Privacy Policy - New Tech Builders">
+<x-layouts.app title="Privacy Policy · NewTech Builders">
     <x-legal.document
         eyebrow="Legal — Document 01"
         title="Privacy Policy"
-        :meta="['Last updated: 9 February 2026', 'New Tech Builders s.r.o.', 'GDPR · CCPA · App Store · Google Play']"
+        :meta="['Last updated: 19 October 2026', 'NewTech Builders, s.r.o.', 'GDPR · CCPA · App Store · Google Play']"
         :sections="$sections">
 
         <x-legal.section :sections="$sections" id="p1">
-            <p>New Tech Builders s.r.o. ("we," "our," or "us"), a company established in the Czech Republic, respects your privacy and is committed to protecting your personal data in accordance with the General Data Protection Regulation (GDPR) and other applicable data protection laws. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our applications (distributed through the Apple App Store, Google Play Store, or other platforms), websites, and related services (collectively, the "Services").</p>
+            <p>NewTech Builders, s.r.o. ("we," "our," or "us"), Id. No. 21811911, with its registered office at Příčná 1892/4, Nové Město, 110 00 Praha 1, Czech Republic, registered with the Municipal Court in Prague under file C 406331, respects your privacy and is committed to protecting your personal data in accordance with the General Data Protection Regulation (GDPR) and other applicable data protection laws. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our applications (distributed through the Apple App Store, Google Play Store, or other platforms), websites, and related services (collectively, the "Services").</p>
             <p>By accessing or using our Services, you acknowledge that you have read and understood this Privacy Policy. If you do not agree with the practices described herein, please do not use our Services.</p>
         </x-legal.section>
 
@@ -116,7 +116,7 @@
                 <li>With service providers who assist in operating our Services, subject to contractual obligations to protect your data</li>
                 <li>With app store platforms (Apple, Google) as required for app distribution, purchase processing, and compliance with their policies</li>
                 <li>To comply with legal obligations, court orders, or respond to lawful requests from public authorities</li>
-                <li>To protect the rights, privacy, safety, or property of New Tech Builders, our users, or the public</li>
+                <li>To protect the rights, privacy, safety, or property of NewTech Builders, our users, or the public</li>
                 <li>In connection with a merger, acquisition, reorganization, or sale of assets, in which case you will be notified of any change in ownership or use of your personal data</li>
                 <li>With your consent or at your direction</li>
             </ul>
@@ -252,7 +252,8 @@
         <x-legal.section :sections="$sections" id="p21">
             <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us at:</p>
             <div class="mt-6 flex flex-col gap-1.5 [&>p]:mt-0">
-                <p class="font-semibold text-ink">New Tech Builders s.r.o.</p>
+                <p class="font-semibold text-ink">NewTech Builders, s.r.o.</p>
+                <p>Id. No. 21811911, Příčná 1892/4, Nové Město, 110 00 Praha 1, Czech Republic</p>
                 <p>Email: <a href="mailto:info@new-tech-builders.com">info@new-tech-builders.com</a></p>
             </div>
             <p>We aim to respond to all inquiries within 30 days.</p>

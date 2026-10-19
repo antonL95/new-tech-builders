@@ -1,16 +1,23 @@
 @php
     $services = [
-        ['number' => '01', 'title' => 'iOS & Android Development', 'description' => 'Native and cross-platform applications built for release — through review, store listing, and the updates after launch. Both stores, one codebase where it makes sense to share one.'],
-        ['number' => '02', 'title' => 'AI Development', 'description' => 'Model-backed features inside real products: retrieval, generation, and automation wired into an app that has users, rate limits, and a bill to keep down.'],
-        ['number' => '03', 'title' => 'Product Building', 'description' => 'The whole arc, when there is no team yet: scope, design, build, submit, iterate. We have run it end to end on our own products, which is where the estimates come from.'],
-        ['number' => '04', 'title' => 'Consultancy', 'description' => 'Short engagements for teams that already build: architecture review, platform and stack decisions, App Store and Play review problems, release process.'],
+        ['number' => '01', 'title' => 'Web Platforms & Data Migration', 'description' => 'Laravel and React platforms that carry real data. We move records off legacy systems with every relation intact and verified by counts, build search that works across languages and scripts, and give the people who maintain the content tools they can trust.'],
+        ['number' => '02', 'title' => 'iOS & Android Development', 'description' => 'Native and cross-platform applications built for release — through review, store listing, and the updates after launch. Both stores, one codebase where it makes sense to share one.'],
+        ['number' => '03', 'title' => 'AI Development & Governance', 'description' => 'Model-backed features inside real products: retrieval, generation, and automation wired into an app that has users, rate limits, and a bill to keep down. Measured before it ships, reviewed by people where it matters, and documented for the EU AI Act.'],
+        ['number' => '04', 'title' => 'Product Building', 'description' => 'The whole arc, when there is no team yet: scope, design, build, submit, iterate. We have run it end to end on our own products, which is where the estimates come from.'],
+        ['number' => '05', 'title' => 'Consultancy', 'description' => 'Short engagements for teams that already build: architecture review, platform and stack decisions, App Store and Play review problems, release process.'],
     ];
 
     $facts = [
-        ['Entity', 's.r.o.'],
-        ['Based', 'Czech Republic, EU'],
-        ['Platforms', 'iOS, Android, Web'],
+        ['Entity', 's.r.o., founded 2024'],
+        ['Company ID', 'IČO 21811911'],
+        ['Based', 'Prague, Czech Republic, EU'],
+        ['Platforms', 'Web, iOS, Android'],
         ['Shipped', 'Tensen, Moneysky, PromptStor'],
+    ];
+
+    $team = [
+        ['name' => 'Anton Loginov', 'role' => 'Co-founder, engineering', 'bio' => 'Builds and runs our products end to end: web platforms, native iOS and Android apps, and the infrastructure under them. Senior software engineer since 2015, with much of that time spent replacing or rescuing systems other people built.', 'url' => 'https://antonloginov.com', 'domain' => 'antonloginov.com'],
+        ['name' => 'Nadežda Jakúbková', 'role' => 'Co-founder, AI strategy & governance', 'bio' => 'AI solutions consultant. Leads how we evaluate AI output, manage its risks and keep it compliant with the EU AI Act. Lead researcher for foundational technologies in the European Commission’s 2025 market study on language technologies.', 'url' => null, 'domain' => null],
     ];
 
     $products = [
@@ -19,14 +26,14 @@
     ];
 @endphp
 
-<x-layouts.app title="New Tech Builders — Software for iOS, Android, and AI">
+<x-layouts.app title="NewTech Builders · Web, mobile, and AI software">
     <section class="mx-auto grid max-w-[1240px] grid-cols-[minmax(0,1fr)_260px] items-end gap-16 px-10 pt-24 pb-20 tab:grid-cols-1 tab:items-start tab:gap-11 tab:px-6 tab:pt-16 tab:pb-14 mob:gap-9 mob:px-4 mob:pt-11 mob:pb-10">
         <div>
-            <div class="mono-eyebrow mb-9 text-muted">New Tech Builders s.r.o. — Prague, Czech Republic</div>
+            <div class="mono-eyebrow mb-9 text-muted">NewTech Builders, s.r.o. · Prague, Czech Republic</div>
 
-            <h1 class="text-[88px] leading-[0.96] font-semibold tracking-[-0.035em] text-balance text-ink lap:text-[68px] tab:text-[56px] mob:text-[40px]">We build software for iOS, Android, and&nbsp;AI.</h1>
+            <h1 class="text-[88px] leading-[0.96] font-semibold tracking-[-0.035em] text-balance text-ink lap:text-[68px] tab:text-[56px] mob:text-[40px]">We build web, mobile, and&nbsp;AI software.</h1>
 
-            <p class="mt-8 max-w-[560px] text-[18px] leading-[1.55] text-pretty text-body">A small product studio. We take mobile and AI products from scoping through to release on the App Store and Google Play — and we consult when a team only needs the hard part solved.</p>
+            <p class="mt-8 max-w-[560px] text-[18px] leading-[1.55] text-pretty text-body">A small product studio. We take web platforms, mobile apps and AI features from scoping through to release, including the move off legacy systems, and we consult when a team only needs the hard part solved.</p>
 
             <div class="mt-10 flex flex-wrap items-center gap-6">
                 <a href="mailto:info@new-tech-builders.com" class="inline-flex items-center gap-3 bg-ink px-6 py-[15px] text-[14px] font-medium tracking-[0.01em] text-paper no-underline hover:bg-accent">
@@ -51,7 +58,7 @@
         <div class="mx-auto max-w-[1240px] px-10 pt-14 pb-22 tab:px-6 mob:px-4">
             <div class="mb-12 flex items-baseline justify-between gap-6">
                 <h2 class="mono-label text-ink">Services</h2>
-                <span class="font-mono text-[11px] tracking-[0.12em] text-muted">Four things, done properly</span>
+                <span class="font-mono text-[11px] tracking-[0.12em] text-muted">Five things, done properly</span>
             </div>
 
             <div>
@@ -126,6 +133,32 @@
                     </figure>
                 </div>
             @endforeach
+        </div>
+    </section>
+
+    <section class="border-t border-ink">
+        <div class="mx-auto max-w-[1240px] px-10 pt-14 pb-22 tab:px-6 mob:px-4">
+            <div class="mb-12 flex items-baseline justify-between gap-6">
+                <h2 class="mono-label text-ink">Team</h2>
+                <span class="font-mono text-[11px] tracking-[0.12em] text-muted">The people who do the work</span>
+            </div>
+
+            <div>
+                @foreach ($team as $member)
+                    <article class="grid grid-cols-[minmax(0,3fr)_minmax(0,4fr)] gap-10 border-t border-hairline py-8 last:border-b tab:block tab:py-[26px]">
+                        <div>
+                            <h3 class="text-[32px] leading-[1.1] font-semibold tracking-[-0.025em] text-ink tab:text-[26px] mob:text-[22px]">{{ $member['name'] }}</h3>
+                            <p class="mono-num mt-3 text-[12px] uppercase text-muted">{{ $member['role'] }}</p>
+                        </div>
+                        <div class="pt-1.5 tab:pt-3">
+                            <p class="text-[16px] leading-[1.6] text-pretty text-body">{{ $member['bio'] }}</p>
+                            @if ($member['url'])
+                                <a href="{{ $member['url'] }}" target="_blank" rel="noopener" class="tap-44 mt-4 inline-flex text-[14px] font-medium text-accent">{{ $member['domain'] }} ↗</a>
+                            @endif
+                        </div>
+                    </article>
+                @endforeach
+            </div>
         </div>
     </section>
 
