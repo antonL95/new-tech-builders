@@ -4,11 +4,13 @@ FROM oven/bun:1.4.0 AS bun-source
 FROM serversideup/php:8.5-cli AS cli-base
 USER root
 RUN install-php-extensions intl bcmath
+COPY --chmod=644 docker/php/zzz-custom-php.ini /usr/local/etc/php/conf.d/
 USER www-data
 
 FROM serversideup/php:8.5-frankenphp AS web-base
 USER root
 RUN install-php-extensions intl bcmath
+COPY --chmod=644 docker/php/zzz-custom-php.ini /usr/local/etc/php/conf.d/
 USER www-data
 
 FROM cli-base AS vendor
