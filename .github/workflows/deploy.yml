@@ -1,0 +1,45 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '*.md'
+      - 'tests/**'
+      - '.github/**'
+      - '.agents/**'
+      - '.claude/**'
+      - '.codex/**'
+      - '.gemini/**'
+      - 'bin/**'
+      - 'docker/dev/**'
+      - 'compose.dev.yaml'
+      - 'boost.json'
+      - 'phpstan.neon'
+      - 'phpunit.xml'
+      - 'pint.json'
+      - 'rector.php'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      COOLIFY_URL: ${{ vars.COOLIFY_URL }}
+      COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
+      DEPLOY_SHA: ${{ github.event_name == 'push' && github.sha || '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy web
+        run: scripts/coolify-deploy.sh "${{ vars.COOLIFY_WEB_UUID }}"

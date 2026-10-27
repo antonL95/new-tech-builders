@@ -25,7 +25,6 @@ phpstan.neon
 pint.json
 rector.php
 Dockerfile
-docker-compose.yaml
 .dockerignore
 .env.herd-backup
 .dev.local

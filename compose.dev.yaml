@@ -21,7 +21,6 @@ x-project-volumes: &project-volumes
   - &ro-docker ./docker:/var/www/html/docker:ro
   - &ro-compose-dev-yaml ./compose.dev.yaml:/var/www/html/compose.dev.yaml:ro
   - &ro-dockerfile ./Dockerfile:/var/www/html/Dockerfile:ro
-  - &ro-docker-compose-yaml ./docker-compose.yaml:/var/www/html/docker-compose.yaml:ro
 
 x-dev-php-env: &dev-php-env
   APP_SERVICES_CACHE: /tmp/laravel-services.php
@@ -81,7 +80,6 @@ services:
       - *ro-docker
       - *ro-compose-dev-yaml
       - *ro-dockerfile
-      - *ro-docker-compose-yaml
       - node_modules:/var/www/html/node_modules
     labels:
       dev.orbstack.domains: vite.${COMPOSE_PROJECT_NAME:-new-tech-builders}.orb.local
@@ -113,7 +111,6 @@ services:
       - *ro-docker
       - *ro-compose-dev-yaml
       - *ro-dockerfile
-      - *ro-docker-compose-yaml
       - ${DEV_GIT_COMMON_DIR:-./.git}:${DEV_GIT_COMMON_DIR:-/mnt/main-git}:ro
       - node_modules:/var/www/html/node_modules
       - composer-cache:/composer/cache
