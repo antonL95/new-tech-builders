@@ -27,6 +27,10 @@ RUN --mount=type=cache,target=/tmp/bun-cache,uid=33,gid=33 \
 RUN bun run build
 
 FROM web-base AS web
-ENV PHP_OPCACHE_ENABLE=1
+ENV PHP_OPCACHE_ENABLE=1 \
+    AUTORUN_ENABLED=true
 COPY --from=vendor --chown=www-data:www-data /var/www/html /var/www/html
 COPY --from=assets --chown=www-data:www-data /var/www/html/public/build /var/www/html/public/build
+HEALTHCHECK --start-period=20s --start-interval=2s --interval=5s --timeout=3s --retries=36 \
+    CMD ["curl", "--fail", "--silent", "--output", "/dev/null", "http://127.0.0.1:8080/up"]
+CMD ["php", "artisan", "octane:start", "--server=frankenphp", "--port=8080", "--max-requests=500"]
