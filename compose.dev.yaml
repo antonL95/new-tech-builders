@@ -1,0 +1,138 @@
+x-php-image: &php-image
+  build:
+    context: .
+    dockerfile: Dockerfile
+    target: web-base
+  image: new-tech-builders-dev-php
+
+x-hardening: &hardening
+  security_opt:
+    - no-new-privileges:true
+
+x-project-volumes: &project-volumes
+  - &project .:/var/www/html
+  - &ro-git ./.git:/var/www/html/.git:ro
+  - &ro-claude ./.claude:/var/www/html/.claude:ro
+  - &ro-github ./.github:/var/www/html/.github:ro
+  - &ro-claude-md ./CLAUDE.md:/var/www/html/CLAUDE.md:ro
+  - &ro-mcp-json ./.mcp.json:/var/www/html/.mcp.json:ro
+  - &ro-idea ./.idea:/var/www/html/.idea:ro
+  - &ro-bin ./bin:/var/www/html/bin:ro
+  - &ro-docker ./docker:/var/www/html/docker:ro
+  - &ro-compose-dev-yaml ./compose.dev.yaml:/var/www/html/compose.dev.yaml:ro
+  - &ro-dockerfile ./Dockerfile:/var/www/html/Dockerfile:ro
+  - &ro-docker-compose-yaml ./docker-compose.yaml:/var/www/html/docker-compose.yaml:ro
+
+x-dev-php-env: &dev-php-env
+  APP_SERVICES_CACHE: /tmp/laravel-services.php
+  PHP_MEMORY_LIMIT: 512M
+  PHP_OPCACHE_VALIDATE_TIMESTAMPS: 1
+  PHP_OPCACHE_REVALIDATE_FREQ: 0
+
+x-app-secrets: &app-secrets
+  APP_KEY:
+
+x-php-app: &php-app
+  <<: [*php-image, *hardening]
+  volumes: *project-volumes
+  environment:
+    <<: [*app-secrets, *dev-php-env]
+  restart: unless-stopped
+
+services:
+  php:
+    <<: *php-app
+    command:
+      [
+        'php', 'artisan', 'octane:start',
+        '--server=frankenphp',
+        '--host=0.0.0.0',
+        '--port=8080',
+        '--workers=2',
+        '--max-requests=500',
+        '--watch',
+      ]
+    labels:
+      dev.orbstack.domains: ${COMPOSE_PROJECT_NAME:-new-tech-builders}.orb.local
+      dev.orbstack.http-port: 8080
+    healthcheck:
+      test: ['CMD', 'curl', '--fail', '--silent', '--output', '/dev/null', 'http://127.0.0.1:8080/up']
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 10s
+
+  bun:
+    image: oven/bun:1.4.3-alpine
+    working_dir: /var/www/html
+    command: ['bun', '--bun', 'run', 'dev']
+    environment:
+      DEV_VITE_CONTAINER: '1'
+      DEV_VITE_ORIGIN: https://vite.${COMPOSE_PROJECT_NAME:-new-tech-builders}.orb.local
+    volumes:
+      - *project
+      - *ro-git
+      - *ro-claude
+      - *ro-github
+      - *ro-claude-md
+      - *ro-mcp-json
+      - *ro-idea
+      - *ro-bin
+      - *ro-docker
+      - *ro-compose-dev-yaml
+      - *ro-dockerfile
+      - *ro-docker-compose-yaml
+      - node_modules:/var/www/html/node_modules
+    labels:
+      dev.orbstack.domains: vite.${COMPOSE_PROJECT_NAME:-new-tech-builders}.orb.local
+      dev.orbstack.http-port: 5173
+    <<: *hardening
+    cap_drop:
+      - ALL
+    restart: unless-stopped
+
+  tools:
+    build:
+      context: docker/dev
+      additional_contexts:
+        base: service:php
+    image: new-tech-builders-dev-tools
+    command: ['bash', 'docker/dev/with-orbstack-ca.sh', 'sleep', 'infinity']
+    init: true
+    healthcheck:
+      disable: true
+    volumes:
+      - *project
+      - *ro-git
+      - *ro-claude
+      - *ro-github
+      - *ro-claude-md
+      - *ro-mcp-json
+      - *ro-idea
+      - *ro-bin
+      - *ro-docker
+      - *ro-compose-dev-yaml
+      - *ro-dockerfile
+      - *ro-docker-compose-yaml
+      - ${DEV_GIT_COMMON_DIR:-./.git}:${DEV_GIT_COMMON_DIR:-/mnt/main-git}:ro
+      - node_modules:/var/www/html/node_modules
+      - composer-cache:/composer/cache
+      - pest-cache:/var/www/.pest
+      - rector-cache:/tmp/rector_cached_files
+      - phpstan-cache:/tmp/phpstan
+    environment:
+      DEV_VITE_CONTAINER: '1'
+      SHOW_WELCOME_MESSAGE: 'false'
+      PHP_MEMORY_LIMIT: '-1'
+      APP_SERVICES_CACHE: /tmp/laravel-services.php
+      COMPOSER_PROCESS_TIMEOUT: '0'
+    <<: *hardening
+
+volumes:
+  node_modules:
+  composer-cache:
+    name: new-tech-builders-composer-cache
+    external: true
+  pest-cache:
+  rector-cache:
+  phpstan-cache:

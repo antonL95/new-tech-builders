@@ -25,3 +25,6 @@ yarn-error.log
 
 # EnvKit — per-project PHP error log (do not commit)
 php_error.log
+.env.herd-backup
+.dev.local
+/public/frankenphp-worker.php
