@@ -27,7 +27,8 @@ The stack serves the application at https://new-tech-builders.orb.local and Vite
 |---------|--------------|
 | `bin/dev up` | Builds the images and starts the stack with secrets from Bitwarden |
 | `bin/dev restart` | Recreates `php` with freshly fetched secrets |
-| `bin/dev down` | Stops the stack and keeps the data volumes |
+| `bin/dev down` | Stops the stack and keeps the data volumes. Stacks never start on their own, so after a reboot run `bin/dev up` in the projects you work on |
+| `bin/dev down --others` | Stops every other `bin/dev` stack on this machine, of any project, and leaves this one running |
 | `bin/dev secrets:check` | Lists which of the expected secrets Bitwarden holds, by name only |
 | `bin/dev logs [service]` | Follows the logs |
 | `bin/dev compose ...` | Runs any `docker compose` command against this checkout's stack |

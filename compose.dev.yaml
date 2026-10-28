@@ -36,7 +36,6 @@ x-php-app: &php-app
   volumes: *project-volumes
   environment:
     <<: [*app-secrets, *dev-php-env]
-  restart: unless-stopped
 
 services:
   php:
@@ -87,14 +86,11 @@ services:
     <<: *hardening
     cap_drop:
       - ALL
-    restart: unless-stopped
 
   tools:
     build:
       context: docker/dev
-      additional_contexts:
-        base: service:php
-    image: new-tech-builders-dev-tools
+    image: devstack-tools:1
     command: ['bash', 'docker/dev/with-orbstack-ca.sh', 'sleep', 'infinity']
     init: true
     healthcheck:
