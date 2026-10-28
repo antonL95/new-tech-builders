@@ -21,7 +21,8 @@ This project's coding guidelines are split into path-scoped rule files in `.clau
 | File | Scope | Description |
 |------|-------|-------------|
 | `foundation.md` | Global | Project conventions, skills, structure, communication |
-| `tooling.md` | Global | Laravel Boost MCP tools and Herd serving |
+| `tooling.md` | Global | Laravel Boost MCP tools |
+| `dev-environment.md` | Global | Docker stack, `bin/dev`, local URLs and deployment |
 | `php.md` | `**/*.php` | PHP coding standards, types, constructors, enums |
 | `laravel-core.md` | `**/*.php` | Eloquent, models, database, auth, queues, config |
 | `laravel-v13.md` | `**/*.php` | Laravel 13 structure and version-specific changes |

@@ -44,4 +44,4 @@ globs:
 
 ## Vite Error
 
-- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
+- If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, check the stack with `bin/dev compose ps`, or build the assets with `bin/dev bun run build`.
