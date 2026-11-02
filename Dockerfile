@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM oven/bun:1.4.0 AS bun-source
+FROM oven/bun:1.4.4 AS bun-source
 
 FROM serversideup/php:8.5-cli-v5.0.5 AS cli-base
 USER root
