@@ -37,7 +37,7 @@ export default defineConfig(({ mode }) => ({
     server: {
         cors: true,
         watch: {
-            ignored: ['**/storage/framework/views/**'],
+            ignored: ['**/vendor/**', '**/storage/**'],
         },
         ...devContainerServer(mode),
     },
