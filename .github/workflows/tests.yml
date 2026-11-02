@@ -1,0 +1,134 @@
+name: Test application
+
+on:
+  pull_request:
+    paths-ignore:
+      - '*.md'
+      - 'docs/**'
+      - '.agents/**'
+      - '.claude/**'
+      - '.codex/**'
+      - '.gemini/**'
+  schedule:
+    - cron: '55 3 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  static:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: ./.github/actions/setup-php
+        with:
+          php-version: 8.5
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v6
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Cache Bun dependencies
+        uses: actions/cache@v6
+        with:
+          path: node_modules
+          key: bun-v2-${{ hashFiles('bun.lock') }}
+
+      - name: Validate Composer Files
+        run: composer validate --strict
+
+      - name: Copy Environment File
+        run: cp .env.example .env
+
+      - name: Composer install
+        run: composer install -q --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Install Node Dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Cache Static Analysis Results
+        uses: actions/cache@v6
+        with:
+          path: |
+            /tmp/phpstan
+            /tmp/rector_cached_files
+          key: static-analysis-${{ github.sha }}
+          restore-keys: static-analysis-
+
+      - name: Cache Pint Results
+        uses: actions/cache@v6
+        with:
+          path: storage/framework/cache/pint.cache
+          key: pint-php-8.5-${{ hashFiles('composer.lock', 'pint.json') }}-${{ github.sha }}
+          restore-keys: pint-php-8.5-${{ hashFiles('composer.lock', 'pint.json') }}-
+
+      - name: Lint
+        run: composer test:lint
+
+      - name: Types
+        if: ${{ !cancelled() }}
+        run: composer test:types
+
+      - name: Architecture
+        if: ${{ !cancelled() }}
+        run: composer test:arch
+
+      - name: Build Assets
+        if: ${{ !cancelled() }}
+        run: bun run build
+
+  tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: ./.github/actions/setup-php
+        with:
+          php-version: 8.5
+          cli-opcache: 'true'
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v6
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-
+
+      - name: Copy Environment File
+        run: cp .env.example .env
+
+      - name: Composer install
+        run: composer install -q --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Generate Application Key
+        run: php artisan key:generate
+
+      - name: Unit and Feature Tests
+        run: composer test:unit -- --ci --log-junit=storage/logs/junit-unit-feature.xml ${{ github.event_name == 'schedule' && '--order-by=random' || '' }}
+
+      - name: Upload Unit and Feature Results
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: junit-unit-feature-attempt-${{ github.run_attempt }}
+          path: storage/logs/junit-unit-feature.xml
+          if-no-files-found: ignore
+          retention-days: 30

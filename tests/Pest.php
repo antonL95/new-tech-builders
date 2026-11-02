@@ -3,7 +3,11 @@
 declare(strict_types=1);
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithCachedConfig;
+use Illuminate\Foundation\Testing\WithCachedRoutes;
 use Tests\TestCase;
+
+use function Pest\Laravel\withoutVite;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +20,15 @@ use Tests\TestCase;
 |
 */
 
+pest()->tia()->locally();
+
 pest()->extend(TestCase::class)
-    ->use(RefreshDatabase::class)
+    ->use(RefreshDatabase::class, WithCachedConfig::class, WithCachedRoutes::class)
     ->in('Feature');
+
+pest()->beforeEach(function (): void {
+    withoutVite();
+})->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
