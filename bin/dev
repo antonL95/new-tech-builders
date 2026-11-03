@@ -11,7 +11,7 @@ main_stack_name="new-tech-builders"
 shared_composer_cache="$main_stack_name-composer-cache"
 app_service="php"
 secret_services=(php)
-test_script="test:unit"
+test_script="test:unit-local"
 browser_script=""
 composer_secrets=""
 

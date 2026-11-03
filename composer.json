@@ -56,13 +56,17 @@
             "bunx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"bun run dev\" --names=server,queue,logs,vite --kill-others"
         ],
         "test:lint": [
-            "pint --test",
+            "pint --test --parallel --max-processes=2",
             "@test:refactor"
         ],
         "refactor": "rector",
         "test:refactor": "rector --dry-run",
         "test:types": "phpstan analyse",
         "test:arch": "pest --filter=arch",
+        "test:unit-local": [
+            "Composer\\Config::disableProcessTimeout",
+            "XDEBUG_MODE=coverage php ./vendor/bin/pest --parallel --processes=4"
+        ],
         "test:unit": "./vendor/bin/pest --parallel",
         "test:without-browser": "./vendor/bin/pest --exclude-group=browser --parallel",
         "lint": [
