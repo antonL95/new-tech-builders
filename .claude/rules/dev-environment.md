@@ -27,4 +27,4 @@ Never run `php`, `composer`, `bun`, `bunx`, `npm`, `npx`, `pnpm` or `node` on th
 - `bin/dev composer`, `bin/dev bun` and `bin/dev tools` get no application secrets. Never try to pass secrets to them or write secrets to a file.
 - `bin`, `docker`, `compose.dev.yaml`, `Dockerfile`, `.git` and the agent configuration are read only inside the containers. Edit them on the Mac.
 - Never run `migrate:fresh` or `db:wipe` against the local database.
-- Production runs on Coolify. `.github/workflows/deploy.yml` deploys the web app on every push to `main`. Never deploy by hand.
+- Production runs on Coolify. Coolify deploys the web app on every push to `main`. Never deploy by hand.
