@@ -7,6 +7,10 @@
 .claude
 .DS_Store
 .mcp.json
+.agents
+.codex
+AGENTS.md
+opencode.json
 .editorconfig
 CLAUDE.md
 boost.json
